@@ -1,0 +1,32 @@
+app: spotme-web
+project: spotme
+       # Groups services (defines registry folder path)
+sonar: true
+
+docker:
+  credsId: spotme-containerregistry
+
+artifacts:
+  - archive.tar.gz
+  - 'imageRef.properties'
+  - 'pipeline.properties'
+
+spinnaker_app: spotme-web
+
+environments:
+  - name: feature/     # Matches branches like feature/login or feature/ABC-123
+    deploy: true
+    spinnaker:
+      pipeline: "deploy-dev"
+      parameters:
+        target_cluster: "k8s-dev-west"
+        
+  - name: develop      # Matches the exact develop branch
+    deploy: true
+    spinnaker:
+      pipeline: "deploy-dev"
+
+  - name: master       # Matches the master branch
+    deploy: true
+    spinnaker:
+      pipeline: "deploy-prod"
