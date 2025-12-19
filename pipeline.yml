@@ -5,6 +5,15 @@ sonar: true
 
 docker:
   credsId: spotme-containerregistry
+  
+custom:
+  build_commands:
+  - npm install
+  - npm install @ionic/cli
+  - npm install axios
+  - ionic build
+  - tar -czvf spotme-web-archive.tar.gz dist
+
 
 artifacts:
   - '*archive.tar.gz'
@@ -12,6 +21,8 @@ artifacts:
   - 'pipeline.properties'
 
 spinnaker_app: spotme-web
+
+
 
 environments:
   - name: feature/     # Matches branches like feature/login or feature/ABC-123
