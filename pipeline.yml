@@ -1,13 +1,13 @@
 app: spotme-web
-project: spotme
-       # Groups services (defines registry folder path)
+project: spotme # Groups services (defines registry folder path)
+stack: nodejs
 sonar: true
 
 docker:
   credsId: spotme-containerregistry
 
 artifacts:
-  - archive.tar.gz
+  - '*archive.tar.gz'
   - 'imageRef.properties'
   - 'pipeline.properties'
 
